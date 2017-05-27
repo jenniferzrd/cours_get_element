@@ -5,41 +5,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>JS</title>
+  <script src="utility.js"></script>
   <script>
-var a = (function app() {
-  "use strict";
-  var titre, parags;
-  window.onload = function start() {
-    var i;
-  titre = document.getElementById('title_main');
-  // console.log(titre);
-  parags = document.querySelectorAll(".text");
-  // console.log(parags);
-  for (i = 0; i < parags.length; i+=1) {
-    console.log(parags[i]);
-      console.log(parags[i]).textContent;
-            console.log(parags[i]).nextElementSibling;
-  }
-  // parcourir parags avec
-  };
-}());
+  var a = (function app() {
+    "use strict";
+    var titre, elements, squares, compterSquareActifs;
+    window.onload = function start() {
+      var i;
+      titre = document.getElementById('title_main');
+      // console.log(titre);
+      elements = document.querySelectorAll(".text");
+      squares = document.querySelectorAll(".square")
+      // console.log(elements);
+      for (i = 0; i < elements.length; i+=1) {
+        // console.log(elements[i]);
+        // console.log(elements[i]).textContent;
+        // console.log(elements[i]).nextElementSibling;
+        elements[i].onclick = genererClicks;
+      }
+
+      for (i = 0; i < squares.length; i+=1) {
+          squares[i].onclick = genererClicks;
+      }
+      // parcourir elements avec
+};
+    function genererClicks() {
+        console.log("clicked");
+        console.log(this);
+        if (this.classList.contains("square")) {
+          this.classList.toggle("is-active");
+          compterSquareActifs();
+        }
+    };
+      // var span = document.getElementById("nb_clicks");
+      // var actifs = document.querySelectorAll(".square .square.is-active")
+
+      compterSquareActifs = function compterSquareActifs() {
+
+        var span, actifs, countActifs;
+        span = byId("nb_clicks");
+        actifs = selectAll(".squares .square.is-active");
+        countActifs = actifs.length;
+        span.innerHTML  = countActifs;
+        log(countActifs)
+        // ou ecrire :
+        // byId("nb_clicks").innerHtml = selectAll(".squares .square.is-active").length;
+      };
+  }());
 
   </script>
+  <style>
+  .squares {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .square {
+
+    height: 80px;
+    width: 80px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  .square:hover {
+    background-color: red;
+  }
+
+.is-active {
+  background-color: blue;
+}
+  </style>
 
 </head>
 <body>
-  <h1 id="title" class="title"> Hello </h1>
+  <h1 id="title" class="title"> Hello
+  <span id="nb_clicks" class="text is-active">0</span>
+  <span> &nbsp;squares actifs ...</span>
+  </h1>
   <p class="text">
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente tempora eos blanditiis perspiciatis velit laboriosam dolorem, voluptatum dolore fuga dignissimos fugiat ab recusandae, qui deserunt! Laborum dolore aliquid minima, culpa!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente tempora eos blanditiis perspiciatis velit laboriosam dolorem, voluptatum dolore fuga dignissimos fugiat ab recusandae, qui deserunt! Laborum dolore aliquid minima, culpa!
   </p>
   <input type="text" id="saisie" class="input">
-<ul class="list">
-  <li class="item">a</li>
-  <li class="item">b</li>
-  <li class="item">c</li>
-</ul>
-<p class="text">
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur quia expedita itaque in, pariatur odio asperiores rerum velit quam eaque corporis necessitatibus ex. Laboriosam alias neque tempora veritatis quis nemo.
-</p>
+  <ul class="list">
+    <li class="item">a</li>
+    <li class="item">b</li>
+    <li class="item">c</li>
+  </ul>
+  <div class="squares">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+  </div>
+  <p class="text">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur quia expedita itaque in, pariatur odio asperiores rerum velit quam eaque corporis necessitatibus ex. Laboriosam alias neque tempora veritatis quis nemo.
+  </p>
+
 </body>
 </html>
